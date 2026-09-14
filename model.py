@@ -3,6 +3,11 @@ MODEL = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 # MODEL = "google/gemma-3-270m-it"
 
 LORA_TARGETS = [
-    "q_proj", "k_proj", "v_proj", "o_proj",
-    "gate_proj", "up_proj", "down_proj",
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj",
 ]

@@ -1,9 +1,11 @@
 # Provenance
 
-- **Weights in:** `TinyLlama/TinyLlama-1.1B-Chat-v1.0` (Apache-2.0)
-- **Architecture:** Llama (Meta Platforms, US)
-- **Pretraining org:** TinyLlama project, Singapore University of Technology and Design (SUTD)
-- **Training data for our adapter:** `openai/gsm8k` only
-- **Not used:** Qwen, DeepSeek, Yi, GLM, or distillation from a PRC teacher
+- **Weights:** Gemma 3 1B Instruct (Google DeepMind, US)
+- **MLX convert:** mlx-community/gemma-3-1b-it-8bit
+- **Not used:** Qwen, DeepSeek, Yi, GLM, TinyLlama
+- **Eval data:** openai/gsm8k test only
+- **License:** Gemma Terms of Use (acknowledge on Hugging Face once)
 
-TinyLlama is **1.1B**, not ≤0.5B. US-origin ≤0.5B alternative: `google/gemma-3-270m-it`.
+TinyLlama scored ~0% here because it is not a math model and rarely emits `####`.
+Gemma 3 1B published ~63% GSM8K 8-shot CoT. That is still not the Qwen 80% run.
+Do not sell the Qwen checkpoint. SFT this Gemma on GSM8K gold traces.

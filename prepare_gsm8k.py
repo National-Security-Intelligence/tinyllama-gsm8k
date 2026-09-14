@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-"""Write GSM8K train/valid jsonl for mlx_lm.lora (chat format)."""
-
 from __future__ import annotations
 
 import json
@@ -16,8 +14,7 @@ OUT = Path("data/gsm8k")
 def row(question: str, answer: str) -> dict:
     return {
         "messages": [
-            {"role": "system", "content": SYSTEM},
-            {"role": "user", "content": question.strip()},
+            {"role": "user", "content": SYSTEM + "\n\n" + question.strip()},
             {"role": "assistant", "content": answer.strip()},
         ]
     }

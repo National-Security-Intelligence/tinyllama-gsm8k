@@ -1,18 +1,16 @@
-# tinyllama-gsm8k
+# gsm8k-gemma (MLX)
 
-Apple Silicon via **MLX** (not PyTorch MPS). **uv** + **Ruff** only.
+TinyLlama hit 0% on `####` match. That is expected. This repo now uses **Gemma 3 1B Instruct** (Google, US).
 
 ```bash
-git clone https://github.com/National-Security-Intelligence/tinyllama-gsm8k.git
-cd tinyllama-gsm8k
+git pull
 uv sync
-uv run ruff check .
 uv run python eval_gsm8k.py --sample 200 --seed 0
 ```
 
-`--sample 200` = random 200 from official GSM8K test. `--sample 0` = full 1,319.
+Prints **strict** (`####`) and **flexible** (last number). First two completions are dumped so you can see format vs math errors.
 
-Train (after baseline):
+Then train:
 
 ```bash
 uv run python prepare_gsm8k.py

@@ -1,23 +1,20 @@
 # tinyllama-gsm8k
 
-Public training scripts. **Not Qwen.** Base is [TinyLlama/TinyLlama-1.1B-Chat-v1.0](https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0).
-
-| | |
-|---|---|
-| Params | 1.1B (there is no official TinyLlama 0.5B) |
-| Architecture | Llama (Meta, US) |
-| Pretrain | TinyLlama project, SUTD Singapore, 3T tokens |
-| License | Apache-2.0 |
-| PRC weights | None |
-
-Do not sell a Qwen checkpoint as this model. Scores do not transfer. Retrain from GSM8K gold traces only — no distillation from Qwen.
-
-If procurement needs **US-origin and ≤0.5B**, set `MODEL` in `model.py` to `google/gemma-3-270m-it`.
+**Package manager: [uv](https://docs.astral.sh/uv/) only.** No pip, no venv module.
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python train_sft.py
-python train_grpo.py
-python eval_gsm8k.py --adapter outputs/sft
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv sync
+uv run python train_sft.py
+uv run python autotune.py
 ```
+
+Base: `TinyLlama/TinyLlama-1.1B-Chat-v1.0` (not Qwen).
+
+| Command | What |
+|---|---|
+| `uv sync` | create `.venv` and install deps |
+| `uv run python shrink.py --layers 8` | ~0.48B student |
+| `uv run python train_sft.py` | SFT on GSM8K |
+| `uv run python autotune.py` | if a run fails, retune lr/steps and retry |
+| `uv run python eval_gsm8k.py` | GSM8K exact match |

@@ -1,20 +1,30 @@
 # tinyllama-gsm8k
 
-**Package manager: [uv](https://docs.astral.sh/uv/) only.** No pip, no venv module.
+**[uv](https://docs.astral.sh/uv/) only.** No pip.
+
+## macOS (you)
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-uv sync
-uv run python train_sft.py
-uv run python autotune.py
+brew install uv
+uv --version
 ```
 
-Base: `TinyLlama/TinyLlama-1.1B-Chat-v1.0` (not Qwen).
+Then in this repo:
 
-| Command | What |
-|---|---|
-| `uv sync` | create `.venv` and install deps |
-| `uv run python shrink.py --layers 8` | ~0.48B student |
-| `uv run python train_sft.py` | SFT on GSM8K |
-| `uv run python autotune.py` | if a run fails, retune lr/steps and retry |
-| `uv run python eval_gsm8k.py` | GSM8K exact match |
+```bash
+uv sync
+uv run python train_sft.py
+```
+
+Apple Silicon uses Metal (MPS). Scripts already turn off bf16 on Mac.
+Need ~16 GB unified memory for 1.1B LoRA. A 8 GB Mac will swap and crawl.
+
+## Commands
+
+```bash
+uv sync
+uv run python shrink.py --layers 8
+uv run python train_sft.py
+uv run python autotune.py
+uv run python eval_gsm8k.py
+```

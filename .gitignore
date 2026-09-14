@@ -1,6 +1,6 @@
 .venv/
 outputs/
+data/
 __pycache__/
-*.pt
-*.bin
-*.safetensors
+.ruff_cache/
+*.py[cod]
